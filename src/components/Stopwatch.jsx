@@ -30,24 +30,20 @@ class Stopwatch extends React.Component {
 
     resetStopwatch = () => {
       clearInterval(this.timerId);
-      this.setState({milliseconds: 0, seconds: 0, minutes: 0})
-    }
-
-
-    componentWillUnmount(){
-      clearInterval(this.timerId);
+      this.setState({milliseconds: 0, seconds: 0, minutes: 0, isStart: false})
     }
 
   render(){
-    const {minutes, seconds, milliseconds} = this.state
+    const {minutes, seconds, milliseconds, isStart} = this.state
     return(
       <section className="stopwatch">
         <div className="stopwatchDisplay">
           <h3>{minutes} : {seconds} : {milliseconds}</h3>
         </div>
         <div>
-          <button className="btnStart" onClick={this.startingStopwatch}>Start</button>
-          <button className="btnStart" onClick={this.pausedStopwatch}>Pause</button>
+          {isStart?(<button className="btnStop" onClick={this.resetStopwatch}>Stop</button>):(<button className="btnStart" onClick={this.startingStopwatch}>Start</button>)
+          }
+          <button className="btnPause" onClick={this.pausedStopwatch}>Pause</button>
         </div>
       </section>
     )
